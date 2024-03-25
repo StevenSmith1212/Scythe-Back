@@ -1,0 +1,35 @@
+Image Conversion
+LINK
+
+Javascript image_Conversion library.
+	• Converts to image object, and then can write to jpg, jpeg, png, gif
+
+	• Need something that can write to csv (Comma Seperated Vector)
+	• Convert to SVG(Scalabel Vector Graphics
+
+
+
+Categorize the different types of files.
+i.e.
+	• Image (PNG, JPEG, JPG, SVG)
+	• Audio (MP3, MP4 [special])
+	• Document (doc, docx, word, pdf, html)
+
+
+
+Look into saving files to a local browser storage so there is no database required
+	• No account detailing. No information to steal 
+
+
+Functionality
+	1. User uploads a file
+		a. Web interaction
+	2. The program identifies the type of file
+	3. A window pops up asking what they want to convert it to, 
+		a. Asks for an email address/ or to download it directly from the page
+	4. The program converts the file to all types listed for the file type
+	5. Compresses the file types into a zip/rar file
+	6. Sends the file/ downloads the file onto the machine requesting
+
+	
+
