@@ -1,8 +1,9 @@
 const Jimp = require('jimp');
-const JSzip = require('jszip');
+const JSZip = require("JSzip");
 const fileSave = require("file-saver");
-const zip = new JSzip();
-const fs = requires('fs'); 
+const fs = require('fs');
+
+
 
 const testFile = './test1.png'
 
@@ -28,30 +29,43 @@ const testFile = './test1.png'
 // });
 
 // Load the image
-Jimp.read(testFile)
+Jimp.read(testFile) // This will be the file that is caught by the User upload
     .then(image => {
-        //Converts all of the files
-        const gifOutput = "./output.gif"
-        const pngOutput = "./output.png"
-        const jpgOutput = './output.jpg';
+        const zipAdd = "/zipped";
 
+        //creates a foler if there isn't a foler
+        try {
+            if (!fs.existsSync(zipAdd)) {
+                fs.mkdirSync(zipAdd)
+            }
+        } catch (err) {
+            console.error(err);
+        }
+
+        //Converts all of the files
+        const gifOutput = "./zipped/output_gif.gif"
+        const pngOutput = "./zipped/output_png.png"
+        const jpgOutput = './zipped/output_jpg.jpg';
+
+        //writes the converted images into a folder
         image.writeAsync(pngOutput);
         image.writeAsync(gifOutput);
         image.writeAsync(jpgOutput);
 
-        zip.file(gifOutput)
-        zip.file(pngOutput)
-        zip.file(jpgOutput)
+
+        const zip = new JSZip();
+        var outputFolder = zip.folder("images");
+
+        outputFolder.file("gifOutput", imgData, {base64: true});
+        outputFolder.file("pngOutput", imgData, {base64: true});
+        outputFolder.file("jpgOutput", imgData, {base64: true});
 
         zip.generateAsync({ type: "blob" })
-            .then(content => {
-                saveAs(content, "myZip.zip");
-                console.log("Zipped");
-                return 
-            })
-            .catch(error => {
-                console.error('Error:', error)
+            .then(function (content) {
+                // see FileSaver.js
+                saveAs(content, "example.zip");
             });
+
 
         return  // change the output format as neeed
 
